@@ -1,6 +1,6 @@
 from django.db import models
 
-class Student(models.model):
+class Student(models.Model):
     name = models.CharField(max_length=50)
     rg = models.CharField(max_length=9)
     cpf = models.CharField(max_length=11)
@@ -9,7 +9,7 @@ class Student(models.model):
     def __str__(self):
         return self.name
         
-class Curse(models.model):
+class Curse(models.Model):
     
     LEVEL = (
         ('B', 'Basic'),
