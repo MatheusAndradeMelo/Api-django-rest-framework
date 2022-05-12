@@ -1,5 +1,6 @@
 from django.db import models
 
+# ----------------------- STUDENT MODEL ----------------------------------
 class Student(models.Model):
     name = models.CharField(max_length=50)
     rg = models.CharField(max_length=9)
@@ -8,7 +9,8 @@ class Student(models.Model):
     
     def __str__(self):
         return self.name
-        
+
+# ------------------------ CURSE MODEL ----------------------------------   
 class Curse(models.Model):
     
     LEVEL = (
@@ -20,6 +22,22 @@ class Curse(models.Model):
     cod_curse = models.CharField(max_length=10)
     description = models.CharField(max_length=100)
     level = models.CharField(max_length=1, choices=LEVEL, blank=False, null=False, default='B')
+   
+    def __str__(self):
+        return self.description
+    
+# ----------------------- REGISTRATION MODEL ----------------------------------
+class Registration(models.Model):
+    
+    PERIOD = (
+        ('M', 'Morning'),
+        ('A', 'Afternoon'),
+        ('N', 'Night'),
+    )
+    
+    student = models.ForeignKey(Student, on_delete=models.CASCADE) #(on_delete=models.CASCADE) it's for delete this student when he's deleted in Student model.
+    curse = models.ForeignKey(Curse, on_delete=models.CASCADE)
+    period = models.CharField(max_length=1, choices=PERIOD, blank=False, null=False, default='M')
    
     def __str__(self):
         return self.description
